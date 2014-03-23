@@ -50,6 +50,9 @@
     <ClInclude Include="generateWorld.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="namespaceDec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ToDo.txt">

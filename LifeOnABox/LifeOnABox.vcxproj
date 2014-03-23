@@ -91,6 +91,7 @@
     <ClInclude Include="structs.h" />
     <ClInclude Include="topFunctions.h" />
     <ClInclude Include="variables.h" />
+    <ClInclude Include="namespaceDec.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ToDo.txt" />
