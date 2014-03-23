@@ -11,5 +11,7 @@ int main(int argc, char* argv[]) {
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 
+	ProgramInit();
+
 	glutMainLoop();
 }
