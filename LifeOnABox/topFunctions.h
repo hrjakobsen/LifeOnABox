@@ -1,3 +1,5 @@
 #include "generateWorld.h"
 
-void ProgramInit();
+void ProgramInit() {
+	generate(32);
+}
