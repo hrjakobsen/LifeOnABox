@@ -1,4 +1,4 @@
--Controls
+-Controls // Simple controls added
 	-Mouse
 	-Keyboard
 -Generate World

@@ -9,13 +9,21 @@ void display() {
 
 	glTranslatef(-Position.y, -Position.x, -Position.z);
 
-	for (int x = 0; x < 32; x++) {
-		for (int y = 0; y < 32; y++) {
-			for (int z = 0; z < 32; z++) {
-				if (World32[x][y][z] != 0) {
-					glTranslatef(-y, -x, -z);
-					glutWireCube(1);
-					glTranslatef(y, x, z);
+	for (int x = 1; x < 31; x++) {
+		for (int y = 1; y < 31; y++) {
+			for (int z = 1; z < 31; z++) {
+				if (World32[x][y][z].Type != 0) {
+					vector3D Distance = vector3D(x + Position.x, y + Position.y, z + Position.z);
+					if (Distance.squareMagnitude() <= RenderDistance * RenderDistance) {
+						glTranslatef(-y, -x, -z);
+						if (World32[x][y][z].Type == 1 && World32[x][y][z].AirBesids) {
+							glColor3f(0, 1, 0);
+							glutSolidCube(1);
+							glColor3f(1, 1, 1);
+							glutWireCube(1.01);
+						}
+						glTranslatef(y, x, z);
+					}
 				}
 			}
 		}

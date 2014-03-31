@@ -41,6 +41,10 @@ void keyBoardCallBackDown(unsigned char key, int x, int y) {
 }
 
 void updatePlayerMotion() {
+	if (KEYS[27]) { // ESC
+		glutDestroyWindow(glutGetWindow());
+		exit(0);
+	}
 	float XX = 0;
 	float ZZ = 0;
 	if (KEYS['w']) {
