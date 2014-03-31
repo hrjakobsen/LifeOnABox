@@ -3,6 +3,7 @@
 void UpdateWorldBlocksForAirLook(int WorldSize);
 
 void ProgramInit() {
+	srand((unsigned int)time(NULL));
 	generate(32);
 	UpdateWorldBlocksForAirLook(32);
 }

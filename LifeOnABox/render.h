@@ -14,14 +14,20 @@ void display() {
 			for (int z = 1; z < 31; z++) {
 				if (World32[x][y][z].Type != 0) {
 					vector3D Distance = vector3D(x + Position.x, y + Position.y, z + Position.z);
-					if (Distance.squareMagnitude() <= RenderDistance * RenderDistance) {
+					if (Distance.squareMagnitude() <= RenderDistance * RenderDistance && World32[x][y][z].AirBesids) {
 						glTranslatef(-y, -x, -z);
-						if (World32[x][y][z].Type == 1 && World32[x][y][z].AirBesids) {
+						if (World32[x][y][z].Type == BLOCK_GRASS) {
 							glColor3f(0, 1, 0);
 							glutSolidCube(1);
-							glColor3f(1, 1, 1);
-							glutWireCube(1.01);
+						} else if(World32[x][y][z].Type == BLOCK_WOOD) {
+							glColor3f(0.55, 0.27, 0.08);
+							glutSolidCube(1);
+						} else if(World32[x][y][z].Type == BLOCK_LEAVES) {
+							glColor3f(0.4, .8, 0.4);
+							glutSolidCube(1);
 						}
+						glColor3f(1, 1, 1);
+						glutWireCube(1.01);
 						glTranslatef(y, x, z);
 					}
 				}

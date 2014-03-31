@@ -4,7 +4,9 @@ using namespace JBnamespace;
 #define BLOCK_AIR 0
 #define BLOCK_STONE 1
 #define BLOCK_DIRT 2
-#define BLOCK_GRASS 3
+#define BLOCK_WOOD 3
+#define BLOCK_LEAVES 4
+#define BLOCK_GRASS 5
 
 Blocks World32[32][32][32];
 vector3D HeadRotation = vector3D(0, 0, 0); // Left Right // Up down // Unused
