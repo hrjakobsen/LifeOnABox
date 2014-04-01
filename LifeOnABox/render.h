@@ -25,6 +25,12 @@ void display() {
 	if (YO > WorldBounds - 2) { YO = WorldBounds - 2; }
 	if (ZO > WorldBounds - 2) { ZO = WorldBounds - 2; }
 
+	if (RotationCube) {
+		glTranslatef(WorldBounds / 2, WorldBounds / 2, WorldBounds / 2);
+		glRotatef(TAngle, 1, 1, 1);
+		TAngle += TSpeed;
+	}
+
 	for (int x = XD; x < XO; x++) {
 		for (int y = YD; y < YO; y++) {
 			for (int z = ZD; z < ZO; z++) {
@@ -46,6 +52,12 @@ void display() {
 							glColor3f(0.5, 0.5, 0.5);
 						} else if (World32[x][y][z].Type == BLOCK_SAND) {
 							glColor3f(0.93, 0.79, 0.38);
+						} else if (World32[x][y][z].Type == BLOCK_DARKSTONE) {
+							glColor3f(0.3, 0.3, 0.3);
+						} else if (World32[x][y][z].Type == BLOCK_LIGHT_WOOD) {
+							glColor3f(0.75, 0.47, 0.28);
+						} else if (World32[x][y][z].Type == BLOCK_YELLOW_GRASS) {
+							glColor3f(0.7, 1, 0);
 						}
 						glutSolidCube(1);
 						//glutSolidSphere(1, 10, 10);

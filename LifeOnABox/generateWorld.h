@@ -4,8 +4,9 @@ Blocks Plane16[128][128][128];
 short HeightPorfile[128][128];
 
 void ClearPlaneAndHeightProfile(int WorldSize);
-void CreateTrees(int WorldSize, float HowOffen);
+void CreateTrees(int WorldSize, float HowOffen, int LeaveBlock, int WoodBlock);
 void CreateHillyTerrain(int WorldSize, int Hilly, int TopBlock, int RestBlock, int MiddelBlock, int NumberOfLayersWithMiddelBlock, int NumberOfLayersWithTopBlock);
+void CreateHouses(int WorldSize, float HowOffen, int Block1, int Block2);
 
 void generate(int Size) {
 	for (int x = 0; x < Size; x++) {
@@ -19,7 +20,7 @@ void generate(int Size) {
 	}
 	ClearPlaneAndHeightProfile(Size / 2);
 	CreateHillyTerrain(Size / 2, Size / 6, BLOCK_GRASS, BLOCK_STONE, BLOCK_DIRT, 3, 1);
-	CreateTrees(Size / 2, .05);
+	CreateTrees(Size / 2, .02, BLOCK_LEAVES, BLOCK_WOOD);
 	for (int x = 0; x < Size / 2; x++) {
 		for (int y = 0; y < Size / 2; y++) {
 			for (int z = 0; z < Size / 2; z++) {
@@ -36,6 +37,53 @@ void generate(int Size) {
 			for (int z = 0; z < Size / 2; z++) {
 				if (Plane16[x][y][z].Type != BLOCK_AIR) {
 					World32[x + Size / 4][y + Size / 4][z + Size / 2].Type = Plane16[x][y][z].Type;
+				}
+			}
+		}
+	}
+	ClearPlaneAndHeightProfile(Size / 2);
+	CreateHillyTerrain(Size / 2, Size / 6, BLOCK_DARKSTONE, BLOCK_DARKSTONE, BLOCK_DARKSTONE, 1, 1);
+	CreateTrees(Size / 2, .05, BLOCK_DARKSTONE, BLOCK_STONE);
+	for (int x = 0; x < Size / 2; x++) {
+		for (int y = 0; y < Size / 2; y++) {
+			for (int z = 0; z < Size / 2; z++) {
+				if (Plane16[x][y][z].Type != BLOCK_AIR) {
+					World32[(Size / 2) + z][y + Size / 4][x + Size / 4].Type = Plane16[x][y][z].Type;
+				}
+			}
+		}
+	}
+	ClearPlaneAndHeightProfile(Size / 2);
+	CreateHillyTerrain(Size / 2, 5, BLOCK_GRASS, BLOCK_STONE, BLOCK_DIRT, 3, 1);
+	CreateTrees(Size / 2, .25, BLOCK_LEAVES, BLOCK_WOOD);
+	for (int x = 0; x < Size / 2; x++) {
+		for (int y = 0; y < Size / 2; y++) {
+			for (int z = 0; z < Size / 2; z++) {
+				if (Plane16[x][y][z].Type != BLOCK_AIR) {
+					World32[x + Size / 4][y + Size / 4][(Size / 2 - 1) - z].Type = Plane16[x][y][z].Type;
+				}
+			}
+		}
+	}
+	ClearPlaneAndHeightProfile(Size / 2);
+	CreateHillyTerrain(Size / 2, 5, BLOCK_YELLOW_GRASS, BLOCK_STONE, BLOCK_DIRT, 3, 1);
+	CreateTrees(Size / 2, .01, BLOCK_LEAVES, BLOCK_WOOD);
+	for (int x = 0; x < Size / 2; x++) {
+		for (int y = 0; y < Size / 2; y++) {
+			for (int z = 0; z < Size / 2; z++) {
+				if (Plane16[x][y][z].Type != BLOCK_AIR) {
+					World32[y + Size / 4][(Size / 2 - 1) - z][x + Size / 4].Type = Plane16[x][y][z].Type;
+				}
+			}
+		}
+	}
+	ClearPlaneAndHeightProfile(Size / 2);
+	CreateHillyTerrain(Size / 2, Size / 8, BLOCK_STONE, BLOCK_DARKSTONE, BLOCK_STONE, 3, 1);
+	for (int x = 0; x < Size / 2; x++) {
+		for (int y = 0; y < Size / 2; y++) {
+			for (int z = 0; z < Size / 2; z++) {
+				if (Plane16[x][y][z].Type != BLOCK_AIR) {
+					World32[y + Size / 4][(Size / 2) + z][x + Size / 4].Type = Plane16[x][y][z].Type;
 				}
 			}
 		}
@@ -57,7 +105,7 @@ void ClearPlaneAndHeightProfile(int WorldSize) {
 	}
 }
 
-void CreateTrees(int WorldSize, float HowOffen) {
+void CreateTrees(int WorldSize, float HowOffen, int LeaveBlock, int WoodBlock) {
 	int Chance = 1 / HowOffen;
 	for (int x = 0; x < WorldSize; x++) {
 		for (int y = 0; y < WorldSize; y++) {
@@ -66,7 +114,7 @@ void CreateTrees(int WorldSize, float HowOffen) {
 				for (int YY = -2; YY <= 2; YY++) {
 					int X = x + XX;
 					int Y = y + YY;
-					if (Plane16[X][Y][HeightPorfile[X][Y]].Type == BLOCK_WOOD) {
+					if (Plane16[X][Y][HeightPorfile[X][Y]].Type == WoodBlock) {
 						OtherNearBy = true;
 					}
 				}
@@ -75,7 +123,7 @@ void CreateTrees(int WorldSize, float HowOffen) {
 				vector3D MidPoint; 
 				int Height = rand() % 3 + 3;
 				for (int z = 0; z < Height; z++) {
-					Plane16[x][y][z + HeightPorfile[x][y]].Type = BLOCK_WOOD;
+					Plane16[x][y][z + HeightPorfile[x][y]].Type = WoodBlock;
 					MidPoint = vector3D(x, y, z);
 				}
 				int LeavesRadius = rand() % 2 + 1;
@@ -89,7 +137,7 @@ void CreateTrees(int WorldSize, float HowOffen) {
 							int Y = y + YY;
 							vector3D Distance = vector3D(X - MidPoint.x, Y - MidPoint.y, z - MidPoint.z);
 							if (Distance.squareMagnitude() <= LeavesRadius * LeavesRadius && Plane16[X][Y][z + HeightPorfile[x][y]].Type == BLOCK_AIR) {
-								Plane16[X][Y][z + HeightPorfile[x][y]].Type = BLOCK_LEAVES;
+								Plane16[X][Y][z + HeightPorfile[x][y]].Type = LeaveBlock;
 							}
 						}
 					}
@@ -98,7 +146,6 @@ void CreateTrees(int WorldSize, float HowOffen) {
 		}
 	}
 }
-
 
 void CreateHillyTerrain(int WorldSize, int Hilly, int TopBlock, int RestBlock, int MiddelBlock, int NumberOfLayersWithMiddelBlock, int NumberOfLayersWithTopBlock) {
 	if (WorldSize > 32) {

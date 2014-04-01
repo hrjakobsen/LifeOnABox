@@ -9,11 +9,15 @@ using namespace JBnamespace;
 #define BLOCK_LEAVES 5
 #define BLOCK_GRASS 6
 #define BLOCK_SAND 7
+#define BLOCK_DARKSTONE 8
+#define BLOCK_LIGHT_WOOD 9
+#define BLOCK_YELLOW_GRASS 10
 
 #define WorldBounds 128
 Blocks World32[WorldBounds][WorldBounds][WorldBounds];
 vector3D HeadRotation = vector3D(-45, 10, 0); // Left Right // Up down // Unused
 vector3D Position = vector3D(-WorldBounds / 4 + 2, -WorldBounds / 4, -WorldBounds / 4);
+//vector3D Position = vector3D(WorldBounds / 2, -WorldBounds / 2, WorldBounds / 4);
 float CameraSensitivity = 40;
 
 int ScreenWidth;
@@ -28,3 +32,9 @@ float PI = 3.14159265359;
 float DECTORAD = PI / 180;
 
 float RenderDistance = 16;
+
+
+
+bool RotationCube = false;
+float TAngle = 0;
+float TSpeed = 10;
