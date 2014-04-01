@@ -23,6 +23,7 @@ int main(int argc, char* argv[]) {
 	glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH | GLUT_DOUBLE);
 	glutCreateWindow("Life On A Box");
 
+	glutSetCursor(GLUT_CURSOR_NONE);
 	glEnable(GL_DEPTH_TEST);
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);

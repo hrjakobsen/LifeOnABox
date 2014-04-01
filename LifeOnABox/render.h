@@ -9,25 +9,49 @@ void display() {
 
 	glTranslatef(-Position.y, -Position.x, -Position.z);
 
-	for (int x = 1; x < 31; x++) {
-		for (int y = 1; y < 31; y++) {
-			for (int z = 1; z < 31; z++) {
-				if (World32[x][y][z].Type != 0) {
+	int XD = -Position.x - RenderDistance;
+	int YD = -Position.y - RenderDistance;
+	int ZD = -Position.z - RenderDistance;
+
+	int XO = -Position.x + RenderDistance;
+	int YO = -Position.y + RenderDistance;
+	int ZO = -Position.z + RenderDistance;
+
+	if (XD < 1) { XD = 1; }
+	if (YD < 1) { YD = 1; }
+	if (ZD < 1) { ZD = 1; }
+
+	if (XO > WorldBounds - 2) { XO = WorldBounds - 2; }
+	if (YO > WorldBounds - 2) { YO = WorldBounds - 2; }
+	if (ZO > WorldBounds - 2) { ZO = WorldBounds - 2; }
+
+	for (int x = XD; x < XO; x++) {
+		for (int y = YD; y < YO; y++) {
+			for (int z = ZD; z < ZO; z++) {
+				if (World32[x][y][z].Type != BLOCK_AIR && World32[x][y][z].AirBesids) {
 					vector3D Distance = vector3D(x + Position.x, y + Position.y, z + Position.z);
-					if (Distance.squareMagnitude() <= RenderDistance * RenderDistance && World32[x][y][z].AirBesids) {
+					if (Distance.squareMagnitude() <= RenderDistance * RenderDistance) {
 						glTranslatef(-y, -x, -z);
 						if (World32[x][y][z].Type == BLOCK_GRASS) {
 							glColor3f(0, 1, 0);
-							glutSolidCube(1);
 						} else if(World32[x][y][z].Type == BLOCK_WOOD) {
 							glColor3f(0.55, 0.27, 0.08);
-							glutSolidCube(1);
-						} else if(World32[x][y][z].Type == BLOCK_LEAVES) {
+						} else if (World32[x][y][z].Type == BLOCK_LEAVES) {
 							glColor3f(0.4, .8, 0.4);
-							glutSolidCube(1);
+						} else if (World32[x][y][z].Type == BLOCK_BED_ROCK) {
+							glColor3f(0.1, 0.1, 0.1);
+						} else if (World32[x][y][z].Type == BLOCK_DIRT) {
+							glColor3f(0.44, 0.37, 0.15);
+						} else if (World32[x][y][z].Type == BLOCK_STONE) {
+							glColor3f(0.5, 0.5, 0.5);
+						} else if (World32[x][y][z].Type == BLOCK_SAND) {
+							glColor3f(0.93, 0.79, 0.38);
 						}
+						glutSolidCube(1);
+						//glutSolidSphere(1, 10, 10);
 						glColor3f(1, 1, 1);
 						glutWireCube(1.01);
+						//glutWireSphere(1.01, 10, 10);
 						glTranslatef(y, x, z);
 					}
 				}

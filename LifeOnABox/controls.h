@@ -17,24 +17,24 @@ void mouseMotion(int x, int y) {
 		lastY = ScreenHeight / 2;
 		lastX = ScreenWidth / 2;
 	}
-	if (HeadRotation.y > 45) {
-		HeadRotation.y = 45;
+	if (HeadRotation.y > 90) {
+		HeadRotation.y = 90;
 	}
-	if (HeadRotation.y < -45) {
-		HeadRotation.y = -45;
+	if (HeadRotation.y < -90) {
+		HeadRotation.y = -90;
 	}
 }
 
 void keyBoardCallBackUp(unsigned char key, int x, int y) {
 	KEYS[key] = false;
-	if (key == 'W' || key == 'A' || key == 'S' || key == 'D' || key == 'E') {
+	if (key == 'W' || key == 'A' || key == 'S' || key == 'D' || key == 'Z') {
 		KEYS[key + 32] = false;
 	}
 }
 
 void keyBoardCallBackDown(unsigned char key, int x, int y) {
 	KEYS[key] = true;
-	if (key == 'W' || key == 'A' || key == 'S' || key == 'D' || key == 'E') {
+	if (key == 'W' || key == 'A' || key == 'S' || key == 'D' || key == 'Z') {
 		KEYS[key] = false;
 		KEYS[key + 32] = true;
 	}
@@ -47,6 +47,7 @@ void updatePlayerMotion() {
 	}
 	float XX = 0;
 	float ZZ = 0;
+	float YY = 0;
 	if (KEYS['w']) {
 		XX += sin(DECTORAD * HeadRotation.x) * Speed;
 		ZZ += -cos(DECTORAD * HeadRotation.x) * Speed;
@@ -63,6 +64,13 @@ void updatePlayerMotion() {
 		XX += cos(DECTORAD * HeadRotation.x) * Speed;
 		ZZ += sin(DECTORAD * HeadRotation.x) * Speed;
 	}
+	if (KEYS[32]) {
+		YY += Speed;
+	}
+	if (KEYS['z']) {
+		YY -= Speed;
+	}
 	Position.y += XX;
 	Position.z += ZZ;
+	Position.x += YY;
 }

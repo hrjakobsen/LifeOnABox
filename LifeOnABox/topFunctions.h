@@ -4,14 +4,14 @@ void UpdateWorldBlocksForAirLook(int WorldSize);
 
 void ProgramInit() {
 	srand((unsigned int)time(NULL));
-	generate(32);
-	UpdateWorldBlocksForAirLook(32);
+	generate(WorldBounds);
+	UpdateWorldBlocksForAirLook(WorldBounds);
 }
 
 void UpdateWorldBlocksForAirLook(int WorldSize) {
-	for (int x = 0; x < WorldSize; x++) {
-		for (int y = 0; y < WorldSize; y++) {
-			for (int z = 0; z < WorldSize; z++) {
+	for (int x = 1; x < WorldSize - 1; x++) {
+		for (int y = 1; y < WorldSize - 1; y++) {
+			for (int z = 1; z < WorldSize - 1; z++) {
 				if (World32[x + 1][y][z].Type == BLOCK_AIR || World32[x - 1][y][z].Type == BLOCK_AIR || World32[x][y + 1][z].Type == BLOCK_AIR || World32[x][y - 1][z].Type == BLOCK_AIR || World32[x][y][z + 1].Type == BLOCK_AIR || World32[x][y][z - 1].Type == BLOCK_AIR) {
 					World32[x][y][z].AirBesids = true;
 				} else {

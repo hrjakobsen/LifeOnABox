@@ -2,15 +2,18 @@
 using namespace JBnamespace;
 
 #define BLOCK_AIR 0
-#define BLOCK_STONE 1
-#define BLOCK_DIRT 2
-#define BLOCK_WOOD 3
-#define BLOCK_LEAVES 4
-#define BLOCK_GRASS 5
+#define BLOCK_BED_ROCK 1
+#define BLOCK_STONE 2
+#define BLOCK_DIRT 3
+#define BLOCK_WOOD 4
+#define BLOCK_LEAVES 5
+#define BLOCK_GRASS 6
+#define BLOCK_SAND 7
 
-Blocks World32[32][32][32];
-vector3D HeadRotation = vector3D(0, 0, 0); // Left Right // Up down // Unused
-vector3D Position = vector3D(0, 0, 0);
+#define WorldBounds 128
+Blocks World32[WorldBounds][WorldBounds][WorldBounds];
+vector3D HeadRotation = vector3D(-45, 10, 0); // Left Right // Up down // Unused
+vector3D Position = vector3D(-WorldBounds / 4 + 2, -WorldBounds / 4, -WorldBounds / 4);
 float CameraSensitivity = 40;
 
 int ScreenWidth;
@@ -24,4 +27,4 @@ float Speed = 0.2;
 float PI = 3.14159265359;
 float DECTORAD = PI / 180;
 
-float RenderDistance = 32;
+float RenderDistance = 16;
