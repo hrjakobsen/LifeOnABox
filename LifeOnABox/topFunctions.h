@@ -1,11 +1,12 @@
 #include "generateWorld.h"
 
 void UpdateWorldBlocksForAirLook(int WorldSize);
-
+void physicSetup();
 void ProgramInit() {
 	srand((unsigned int)time(NULL));
 	generate(WorldBounds);
 	UpdateWorldBlocksForAirLook(WorldBounds);
+	physicSetup();
 }
 
 void UpdateWorldBlocksForAirLook(int WorldSize) {

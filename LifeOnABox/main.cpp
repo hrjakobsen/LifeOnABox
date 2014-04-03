@@ -8,6 +8,7 @@ void gametimer() {
 	if (Diff > 1 / FramesPerSecond) {
 		LastGameTick = clock();
 		updatePlayerMotion();
+		physicTick((float)Diff);
 		display();
 		FramesCount++;
 	}

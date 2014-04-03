@@ -38,3 +38,11 @@ float RenderDistance = 16;
 bool RotationCube = false;
 float TAngle = 0;
 float TSpeed = 10;
+
+//Physics
+float g = 9.82;
+bool fallDamageActivated = false;
+bool healthbarActivated = false;
+float playerHeight = 1.8;
+float playerRadius = 0.25;
+particle bodyParticles[8];

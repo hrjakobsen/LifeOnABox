@@ -1,4 +1,4 @@
-#include "topFunctions.h"
+#include "collisionDetection.h"
 
 bool FirstTime = true;
 int lastX, lastY;
@@ -70,7 +70,7 @@ void updatePlayerMotion() {
 	if (KEYS['z']) {
 		YY -= Speed;
 	}
-	Position.y += XX;
-	Position.z += ZZ;
-	Position.x += YY;
+	movePlayer(-YY, 0);
+	movePlayer(-XX, 1);
+	movePlayer(-ZZ, 2);
 }
