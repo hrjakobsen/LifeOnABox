@@ -43,4 +43,6 @@ float TSpeed = 10;
 float g = 9.82;
 bool fallDamageActivated = false;
 bool healthbarActivated = false;
-particle bodyParticles[8] = {};
+float playerHeight = 1.8;
+float playerRadius = 0.25;
+particle bodyParticles[8];
