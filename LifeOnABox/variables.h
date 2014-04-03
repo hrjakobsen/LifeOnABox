@@ -38,3 +38,9 @@ float RenderDistance = 16;
 bool RotationCube = false;
 float TAngle = 0;
 float TSpeed = 10;
+
+//Physics
+float g = 9.82;
+bool fallDamageActivated = false;
+bool healthbarActivated = false;
+particle bodyParticles[8] = {};

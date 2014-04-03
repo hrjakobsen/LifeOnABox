@@ -1,1 +1,3 @@
-#define HEJ "a"
+void applyPhysics(float deltaTime) {
+	
+}
