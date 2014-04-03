@@ -81,6 +81,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="collisionDetection.h" />
     <ClInclude Include="controls.h" />
     <ClInclude Include="generateWorld.h" />
     <ClInclude Include="render.h" />
