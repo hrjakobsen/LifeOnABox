@@ -7,7 +7,7 @@ void display() {
 	glRotatef(HeadRotation.y, 1, 0, 0);
 	glRotatef(HeadRotation.x, 0, 1, 0);
 
-	glTranslatef(-Position.y, -Position.x, -Position.z);
+	glTranslatef(-Position.y - .5, -Position.x - 2, -Position.z - .5);
 
 	int XD = -Position.x - RenderDistance;
 	int YD = -Position.y - RenderDistance;
