@@ -57,4 +57,15 @@ namespace JBnamespace {
 
 
 	};
+	class particle {
+	public:
+		vector3D acceleration, velocity, position;
+		particle() : acceleration(vector3D(0, 0, 0)), velocity(vector3D(0, 0, 0)), position(vector3D(0, 0, 0)) {}
+		particle(const vector3D acceleration, const vector3D velocity, const vector3D position) : acceleration(acceleration), velocity(velocity), position(position) {}
+
+		void update(float deltaTime) {
+			velocity += acceleration * deltaTime;
+			position += velocity * deltaTime;
+		}
+	};	
 }
