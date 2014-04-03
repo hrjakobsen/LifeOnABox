@@ -89,7 +89,7 @@ void reshape(int W, int H){
 	// Set the viewport to be the entire window
 	glViewport(0, 0, W, H);
 	// Set the correct perspective.
-	gluPerspective(45, ratio, 0.01, 100);
+	gluPerspective(45, ratio, 0.01, 500);
 	// Get Back to the Modelview
 	glMatrixMode(GL_MODELVIEW);
 	display();
