@@ -64,13 +64,15 @@ void updatePlayerMotion() {
 		XX += cos(DECTORAD * HeadRotation.x) * Speed;
 		ZZ += sin(DECTORAD * HeadRotation.x) * Speed;
 	}
-	if (KEYS[32]) {
-		YY += Speed;
+	if (KEYS[32] && IsPlayerOnGround) {
+		YY += 5;
+		IsPlayerOnGround = false;
 	}
-	if (KEYS['z']) {
-		YY -= Speed;
-	}
-	movePlayer(-YY, 0);
+	/*if (KEYS['z'] && RotateCoolDown <= 0) {
+		RotateWorld(3);
+		RotateCoolDown = FramesPerSecond;
+	}*/
+	AddVelocityToPlayer(-YY, 0);
 	movePlayer(-XX, 1);
 	movePlayer(-ZZ, 2);
 }

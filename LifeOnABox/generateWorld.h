@@ -119,7 +119,7 @@ void CreateTrees(int WorldSize, float HowOffen, int LeaveBlock, int WoodBlock) {
 					}
 				}
 			}
-			if (rand() % Chance == 0 && x >= 2 && y >= 2 && x <= WorldSize - 3 && y <= WorldSize - 3 && !OtherNearBy) {
+			if (rand() % Chance == 0 && x >= 3 && y >= 3 && x <= WorldSize - 4 && y <= WorldSize - 4 && !OtherNearBy) {
 				vector3D MidPoint; 
 				int Height = rand() % 3 + 3;
 				for (int z = 0; z < Height; z++) {
