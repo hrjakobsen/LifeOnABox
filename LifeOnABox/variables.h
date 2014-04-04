@@ -13,8 +13,9 @@ using namespace JBnamespace;
 #define BLOCK_LIGHT_WOOD 9
 #define BLOCK_YELLOW_GRASS 10
 
-#define WorldBounds 32
+#define WorldBounds 256
 Blocks World32[WorldBounds][WorldBounds][WorldBounds];
+int MiniMapView[WorldBounds / 2][WorldBounds / 2];
 vector3D HeadRotation = vector3D(-45, 0, 0); // Left Right // Up down // Unused
 vector3D Position = vector3D(-WorldBounds / 4, -WorldBounds / 4, -WorldBounds / 4);
 //vector3D Position = vector3D(WorldBounds / 2, -WorldBounds / 2, WorldBounds / 4);

@@ -2,10 +2,13 @@
 
 void UpdateWorldBlocksForAirLook(int WorldSize);
 void physicSetup(bool VelocityReset);
+void UpdateMiniMapView();
+
 void ProgramInit() {
 	srand((unsigned int)time(NULL));
 	generate(WorldBounds);
 	UpdateWorldBlocksForAirLook(WorldBounds);
+	UpdateMiniMapView();
 	physicSetup(true);
 }
 
@@ -17,6 +20,18 @@ void UpdateWorldBlocksForAirLook(int WorldSize) {
 					World32[x][y][z].AirBesids = true;
 				} else {
 					World32[x][y][z].AirBesids = false;
+				}
+			}
+		}
+	}
+}
+
+void UpdateMiniMapView() {
+	for (int x = WorldBounds / 2; x >= 1; x--) {
+		for (int y = WorldBounds / 4; y < WorldBounds / 4 * 3; y++) {
+			for (int z = WorldBounds / 4; z < WorldBounds / 4 * 3; z++) {
+				if (World32[x][y][z].Type != BLOCK_AIR) {
+					MiniMapView[y - WorldBounds / 4][z - WorldBounds / 4] = World32[x][y][z].Type;
 				}
 			}
 		}
@@ -79,11 +94,7 @@ void PlayerRotationCheck() {
 			Position *= -1;
 			physicSetup(false);
 			Position *= -1;
-			if (HeadRotation.y > 0) {
-				HeadRotation.y -= 90;
-			} else {
-				HeadRotation.y = -90;
-			}
+			UpdateMiniMapView();
 		} else if (Position.z > WorldBounds / 4 * 3) {
 			RotateWorld(3);
 			float Temp = Position.x;
@@ -95,11 +106,7 @@ void PlayerRotationCheck() {
 			Position *= -1;
 			physicSetup(false);
 			Position *= -1;
-			if (HeadRotation.y > 0) {
-				HeadRotation.y -= 90;
-			} else {
-				HeadRotation.y = -90;
-			}
+			UpdateMiniMapView();
 		} else if (Position.y < WorldBounds / 4) {
 			RotateWorld(0);
 			float Temp = Position.x;
@@ -111,11 +118,7 @@ void PlayerRotationCheck() {
 			Position *= -1;
 			physicSetup(false);
 			Position *= -1;
-			if (HeadRotation.y > 0) {
-				HeadRotation.y -= 90;
-			} else {
-				HeadRotation.y = -90;
-			}
+			UpdateMiniMapView();
 		} else if (Position.y > WorldBounds / 4 * 3) {
 			RotateWorld(1);
 			float Temp = Position.x;
@@ -127,11 +130,7 @@ void PlayerRotationCheck() {
 			Position *= -1;
 			physicSetup(false);
 			Position *= -1;
-			if (HeadRotation.y > 0) {
-				HeadRotation.y -= 90;
-			} else {
-				HeadRotation.y = -90;
-			}
+			UpdateMiniMapView();
 		}
 	}
 	Position *= -1;
