@@ -1,4 +1,5 @@
 #include <math.h>
+#include <iostream>
 namespace JBnamespace {
 	class vector3D {
 	private:

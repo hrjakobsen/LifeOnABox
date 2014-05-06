@@ -135,3 +135,37 @@ void PlayerRotationCheck() {
 	}
 	Position *= -1;
 }
+
+void LookinAt() {
+	vector3D HeadPos = Position * -1;
+	HeadPos.x -= playerHeight;
+	vector3D Direction;
+	Direction.x = sinf(HeadRotation.y*DECTORAD);
+	Direction.y = sinf(-HeadRotation.x*DECTORAD)*cosf(HeadRotation.y*DECTORAD);
+	Direction.z = cosf(-HeadRotation.x*DECTORAD)*cosf(HeadRotation.y*DECTORAD);
+	//std::cout << "x: " << Direction.x << ", y: " << Direction.y << ", z: " << Direction.z << std::endl;
+	Direction.normalize();
+	
+	bool Found = false;
+
+	for (float i = 0; i < reach; i += 0.01) {
+		vector3D newPosition = HeadPos + Direction * i;
+		if (World32[(int)newPosition.x][(int)newPosition.y][(int)newPosition.z].Type != BLOCK_AIR) {
+			BlockLookingAt = vector3D((int)newPosition.x, (int)newPosition.y, (int)newPosition.z);
+			Found = true;
+			break;
+		}
+	}
+	if (!Found) {
+		BlockLookingAt = vector3D(-1, -1, -1);
+	}
+}
+
+void BreakBlock() {
+	if (BlockLookingAt.x > 0) {
+		if (World32[(int)BlockLookingAt.x][(int)BlockLookingAt.y][(int)BlockLookingAt.z].Type != BLOCK_AIR && World32[(int)BlockLookingAt.x][(int)BlockLookingAt.y][(int)BlockLookingAt.z].Type != BLOCK_BED_ROCK) {
+			World32[(int)BlockLookingAt.x][(int)BlockLookingAt.y][(int)BlockLookingAt.z].Type = BLOCK_AIR;
+			UpdateWorldBlocksForAirLook(WorldBounds);
+		}
+	}
+}

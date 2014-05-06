@@ -9,6 +9,7 @@ void gametimer() {
 		LastGameTick = clock();
 		updatePlayerMotion();
 		physicTick((float)Diff);
+		LookinAt();
 		display();
 		FramesCount++;
 	}
@@ -33,6 +34,7 @@ int main(int argc, char* argv[]) {
 	glutIdleFunc(gametimer); 
 	glutKeyboardFunc(keyBoardCallBackDown);
 	glutKeyboardUpFunc(keyBoardCallBackUp);
+	glutMouseFunc(mouseClick);
 
 	ProgramInit();
 

@@ -67,6 +67,7 @@ void updatePlayerMotion() {
 	if (KEYS[32] && IsPlayerOnGround) {
 		YY += 5;
 		IsPlayerOnGround = false;
+		
 	}
 	/*if (KEYS['z'] && RotateCoolDown <= 0) {
 		RotateWorld(3);
@@ -75,4 +76,10 @@ void updatePlayerMotion() {
 	AddVelocityToPlayer(-YY, 0);
 	movePlayer(-XX, 1);
 	movePlayer(-ZZ, 2);
+}
+void mouseClick(int button, int state, int x, int y) {
+	std::cout << button << ", " << state << "\n";
+	if (button == 0 && state == 0) {
+		BreakBlock();
+	}
 }

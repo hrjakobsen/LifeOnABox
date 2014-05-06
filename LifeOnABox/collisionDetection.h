@@ -34,7 +34,7 @@ void physicTick(float deltaTime) {
 		particle bodyParticlesCopy[12];
 		for (int i = 0; i < 12; i++) {
 			bodyParticlesCopy[i] = bodyParticles[i];
-			bodyParticlesCopy[i].update(deltaTime / divider);
+			//bodyParticlesCopy[i].update(deltaTime / divider);
 		}
 		for (int i = 0; i < 12; i++) {
 			int x = bodyParticlesCopy[i].position.x - 2;

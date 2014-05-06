@@ -74,7 +74,23 @@ void display() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 
-	MiniMap();
+	//MiniMap();
+
+	glColor3f(1, 0, 0);
+	glTranslatef(0, 0, -.02);
+	/*glBegin(GL_TRIANGLE_FAN);
+		glVertex2f(0.00003, 0.0003);
+		glVertex2f(0.00003, -0.0003);
+		glVertex2f(-0.00003, -0.0003);
+		glVertex2f(-0.00003, 0.0003);
+	glEnd();
+	glBegin(GL_TRIANGLE_FAN);
+		glVertex2f(0.0003, 0.00003);
+		glVertex2f(0.0003, -0.00003);
+		glVertex2f(-0.0003, -0.00003);
+		glVertex2f(-0.0003, 0.00003);
+	glEnd();*/
+	glTranslatef(0, 0, .02);
 
 	glRotatef(HeadRotation.y, 1, 0, 0);
 	glRotatef(HeadRotation.x, 0, 1, 0);
@@ -142,6 +158,8 @@ void display() {
 						glutSolidCube(1);
 						//glutSolidSphere(1, 10, 10);
 						glColor3f(1, 1, 1);
+						if (x == BlockLookingAt.x && y == BlockLookingAt.y && z == BlockLookingAt.z)
+							glColor3f(0, 0, 0);
 						glutWireCube(1.01);
 						//glutWireSphere(1.01, 10, 10);
 						glTranslatef(y, x, z);
