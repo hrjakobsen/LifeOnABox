@@ -82,4 +82,7 @@ void mouseClick(int button, int state, int x, int y) {
 	if (button == 0 && state == 0) {
 		BreakBlock();
 	}
+	if (button == 2 && state == 0) {
+		PlaceBlock(2);
+	}
 }

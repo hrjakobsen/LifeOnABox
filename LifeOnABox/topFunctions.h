@@ -136,7 +136,7 @@ void PlayerRotationCheck() {
 	Position *= -1;
 }
 
-void LookinAt() {
+void LookingAt() {
 	vector3D HeadPos = Position * -1;
 	HeadPos.x -= playerHeight;
 	vector3D Direction;
@@ -152,12 +152,15 @@ void LookinAt() {
 		vector3D newPosition = HeadPos + Direction * i;
 		if (World32[(int)newPosition.x][(int)newPosition.y][(int)newPosition.z].Type != BLOCK_AIR) {
 			BlockLookingAt = vector3D((int)newPosition.x, (int)newPosition.y, (int)newPosition.z);
+			newPosition = HeadPos + Direction * (i-0.01);
+			BlockPlacePos = vector3D((int)newPosition.x, (int)newPosition.y, (int)newPosition.z);
 			Found = true;
 			break;
 		}
 	}
 	if (!Found) {
 		BlockLookingAt = vector3D(-1, -1, -1);
+		BlockPlacePos = vector3D(-1, -1, -1);
 	}
 }
 
@@ -167,5 +170,10 @@ void BreakBlock() {
 			World32[(int)BlockLookingAt.x][(int)BlockLookingAt.y][(int)BlockLookingAt.z].Type = BLOCK_AIR;
 			UpdateWorldBlocksForAirLook(WorldBounds);
 		}
+	}
+}
+void PlaceBlock(short Type) {
+	if (BlockPlacePos.x > 0 && BlockPlacePos.y > WorldBounds / 4 && BlockPlacePos.z > WorldBounds / 4 && BlockPlacePos.y < 3 * WorldBounds / 4 && BlockPlacePos.z < 3 * WorldBounds / 4) {
+		World32[(int)BlockPlacePos.x][(int)BlockPlacePos.y][(int)BlockPlacePos.z].Type = Type;
 	}
 }

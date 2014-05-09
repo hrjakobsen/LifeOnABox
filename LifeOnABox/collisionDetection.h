@@ -28,13 +28,13 @@ void physicSetup(bool VelocityReset) {
 }
 
 void physicTick(float deltaTime) {
-	bool allSuces = true;
+	bool allSucess = true;
 	for (int divider = 2; divider <= 8; divider *= 2) {
 		bool impossibru = false;
 		particle bodyParticlesCopy[12];
 		for (int i = 0; i < 12; i++) {
 			bodyParticlesCopy[i] = bodyParticles[i];
-			//bodyParticlesCopy[i].update(deltaTime / divider);
+			bodyParticlesCopy[i].update(deltaTime / divider);
 		}
 		for (int i = 0; i < 12; i++) {
 			int x = bodyParticlesCopy[i].position.x - 2;
@@ -53,10 +53,10 @@ void physicTick(float deltaTime) {
 				bodyParticles[i].velocity = vector3D();
 			}
 			IsPlayerOnGround = true;
-			allSuces = false;
+			allSucess = false;
 		}
 	}
-	if (allSuces) {
+	if (allSucess) {
 		IsPlayerOnGround = false;
 	}
 	Position *= -1;

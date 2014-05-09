@@ -74,11 +74,11 @@ void display() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 
-	//MiniMap();
+	MiniMap();
 
 	glColor3f(1, 0, 0);
 	glTranslatef(0, 0, -.02);
-	/*glBegin(GL_TRIANGLE_FAN);
+	glBegin(GL_TRIANGLE_FAN);
 		glVertex2f(0.00003, 0.0003);
 		glVertex2f(0.00003, -0.0003);
 		glVertex2f(-0.00003, -0.0003);
@@ -89,7 +89,7 @@ void display() {
 		glVertex2f(0.0003, -0.00003);
 		glVertex2f(-0.0003, -0.00003);
 		glVertex2f(-0.0003, 0.00003);
-	glEnd();*/
+	glEnd();
 	glTranslatef(0, 0, .02);
 
 	glRotatef(HeadRotation.y, 1, 0, 0);

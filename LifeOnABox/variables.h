@@ -17,8 +17,8 @@ using namespace JBnamespace;
 Blocks World32[WorldBounds][WorldBounds][WorldBounds];
 int MiniMapView[WorldBounds / 2][WorldBounds / 2];
 vector3D HeadRotation = vector3D(-45, 0, 0); // Left Right // Up down // Unused
-//vector3D Position = vector3D(-WorldBounds / 4, -WorldBounds / 4, -WorldBounds / 4);
-vector3D Position = vector3D(-10,-10,-128);
+vector3D Position = vector3D(-WorldBounds / 4, -WorldBounds / 4, -WorldBounds / 4);
+//vector3D Position = vector3D(-10,-10,-128);
 //vector3D Position = vector3D(WorldBounds / 2, -WorldBounds / 2, WorldBounds / 4);
 float CameraSensitivity = 40;
 
@@ -33,7 +33,7 @@ float Speed = 0.2;
 float PI = 3.14159265359;
 float DECTORAD = PI / 180;
 
-float RenderDistance = 150;
+float RenderDistance = 16;
 
 
 bool RotationCube = false;
@@ -55,3 +55,4 @@ int RotateCoolDown = 0;
 //Gameplay Variables
 float reach = 5;
 vector3D BlockLookingAt;
+vector3D BlockPlacePos;
