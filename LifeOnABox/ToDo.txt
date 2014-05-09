@@ -1,14 +1,18 @@
--Controls // Simple controls added
-	-Mouse
-	-Keyboard
--Generate World
-	-Forrest
-	-Savannah
-	-Plains
-	-Desert
-	-HillBilly
--Render World
--Game Physics
-	-Changing Gravity
--Destroy Blocks
--Place Blocks
+-Controls // Simple controls added DONE
+	-Mouse DONE
+	-Keyboard DONE
+-Generate World DONE
+	-Forrest DONE
+	-Savannah DONE
+	-Plains DONE
+	-Desert DONE
+	-HillBilly DONE
+-Render World DONE
+-Game Physics DONE
+	-Changing Gravity DONE
+-Destroy Blocks DONE
+-Place Blocks DONE
+
+v2:
+
+

@@ -2,14 +2,32 @@
 
 void UpdateWorldBlocksForAirLook(int WorldSize);
 void physicSetup(bool VelocityReset);
-void UpdateMiniMapView();
+void UpdateMiniMapView(bool onlyOneBlock, int y, int z);
+void UpdateSingleAirBlock(int x, int y, int z);
 
 void ProgramInit() {
-	srand((unsigned int)time(NULL));
+	//srand((unsigned int)time(NULL));
+	srand((unsigned int)16754);
 	generate(WorldBounds);
 	UpdateWorldBlocksForAirLook(WorldBounds);
-	UpdateMiniMapView();
+	UpdateMiniMapView(false, 0,0);
 	physicSetup(true);
+}
+
+void UpdateSingleAirBlock(int X, int Y, int Z) {
+	for (int x = X - 1; x <= X + 1; x++) {
+		for (int y = Y - 1; y <= Y + 1; y++) {
+			for (int z = Z - 1; z <= Z + 1; z++) {
+				if (World32[x + 1][y][z].Type == BLOCK_AIR || World32[x - 1][y][z].Type == BLOCK_AIR || World32[x][y + 1][z].Type == BLOCK_AIR || World32[x][y - 1][z].Type == BLOCK_AIR || World32[x][y][z + 1].Type == BLOCK_AIR || World32[x][y][z - 1].Type == BLOCK_AIR) {
+					World32[x][y][z].AirBesids = true;
+				}
+				else {
+					World32[x][y][z].AirBesids = false;
+				}
+			}
+		}
+	}
+		
 }
 
 void UpdateWorldBlocksForAirLook(int WorldSize) {
@@ -26,12 +44,20 @@ void UpdateWorldBlocksForAirLook(int WorldSize) {
 	}
 }
 
-void UpdateMiniMapView() {
-	for (int x = WorldBounds / 2; x >= 1; x--) {
-		for (int y = WorldBounds / 4; y < WorldBounds / 4 * 3; y++) {
-			for (int z = WorldBounds / 4; z < WorldBounds / 4 * 3; z++) {
-				if (World32[x][y][z].Type != BLOCK_AIR) {
-					MiniMapView[y - WorldBounds / 4][z - WorldBounds / 4] = World32[x][y][z].Type;
+void UpdateMiniMapView(bool onlyOneBlock, int y, int z) {
+	if (onlyOneBlock) {
+		for (int x = WorldBounds / 2; x >= 1; x--) {
+			if (World32[x][y][z].Type != BLOCK_AIR) {
+				MiniMapView[y - WorldBounds / 4][z - WorldBounds / 4] = World32[x][y][z].Type;
+			}
+		}
+	} else {
+		for (int x = WorldBounds / 2; x >= 1; x--) {
+			for (int y = WorldBounds / 4; y < WorldBounds / 4 * 3; y++) {
+				for (int z = WorldBounds / 4; z < WorldBounds / 4 * 3; z++) {
+					if (World32[x][y][z].Type != BLOCK_AIR) {
+						MiniMapView[y - WorldBounds / 4][z - WorldBounds / 4] = World32[x][y][z].Type;
+					}
 				}
 			}
 		}
@@ -94,7 +120,7 @@ void PlayerRotationCheck() {
 			Position *= -1;
 			physicSetup(false);
 			Position *= -1;
-			UpdateMiniMapView();
+			UpdateMiniMapView(false, 0, 0);
 		} else if (Position.z > WorldBounds / 4 * 3) {
 			RotateWorld(3);
 			float Temp = Position.x;
@@ -106,7 +132,7 @@ void PlayerRotationCheck() {
 			Position *= -1;
 			physicSetup(false);
 			Position *= -1;
-			UpdateMiniMapView();
+			UpdateMiniMapView(false, 0, 0);
 		} else if (Position.y < WorldBounds / 4) {
 			RotateWorld(0);
 			float Temp = Position.x;
@@ -118,7 +144,7 @@ void PlayerRotationCheck() {
 			Position *= -1;
 			physicSetup(false);
 			Position *= -1;
-			UpdateMiniMapView();
+			UpdateMiniMapView(false, 0, 0);
 		} else if (Position.y > WorldBounds / 4 * 3) {
 			RotateWorld(1);
 			float Temp = Position.x;
@@ -130,7 +156,7 @@ void PlayerRotationCheck() {
 			Position *= -1;
 			physicSetup(false);
 			Position *= -1;
-			UpdateMiniMapView();
+			UpdateMiniMapView(false, 0, 0);
 		}
 	}
 	Position *= -1;
@@ -168,12 +194,28 @@ void BreakBlock() {
 	if (BlockLookingAt.x > 0) {
 		if (World32[(int)BlockLookingAt.x][(int)BlockLookingAt.y][(int)BlockLookingAt.z].Type != BLOCK_AIR && World32[(int)BlockLookingAt.x][(int)BlockLookingAt.y][(int)BlockLookingAt.z].Type != BLOCK_BED_ROCK) {
 			World32[(int)BlockLookingAt.x][(int)BlockLookingAt.y][(int)BlockLookingAt.z].Type = BLOCK_AIR;
-			UpdateWorldBlocksForAirLook(WorldBounds);
+			UpdateSingleAirBlock((int)BlockLookingAt.x, (int)BlockLookingAt.y, (int)BlockLookingAt.z);
+			UpdateMiniMapView(true, (int)BlockLookingAt.y, (int)BlockLookingAt.z);
 		}
 	}
 }
-void PlaceBlock(short Type) {
-	if (BlockPlacePos.x > 0 && BlockPlacePos.y > WorldBounds / 4 && BlockPlacePos.z > WorldBounds / 4 && BlockPlacePos.y < 3 * WorldBounds / 4 && BlockPlacePos.z < 3 * WorldBounds / 4) {
-		World32[(int)BlockPlacePos.x][(int)BlockPlacePos.y][(int)BlockPlacePos.z].Type = Type;
+void PlaceBlock() {
+	if (BlockPlacePos.x > 0 && BlockPlacePos.y > WorldBounds / 4 && BlockPlacePos.z > WorldBounds / 4 && BlockPlacePos.y < 3 * WorldBounds / 4-1 && BlockPlacePos.z < 3 * WorldBounds / 4-1) {
+		World32[(int)BlockPlacePos.x][(int)BlockPlacePos.y][(int)BlockPlacePos.z].Type = chosenBlock;
+		bool impossibru = false;
+		for (int i = 0; i < 12; i++) {
+			int x = bodyParticles[i].position.x - 2;
+			int y = bodyParticles[i].position.y;
+			int z = bodyParticles[i].position.z;
+			if (World32[x][y][z].Type != BLOCK_AIR) {
+				impossibru = true;
+			}
+		}
+		if (!impossibru) {
+			UpdateSingleAirBlock((int)BlockPlacePos.x, (int)BlockPlacePos.y, (int)BlockPlacePos.z);
+			UpdateMiniMapView(true, (int)BlockPlacePos.y, (int)BlockPlacePos.z);
+		} else {
+			World32[(int)BlockPlacePos.x][(int)BlockPlacePos.y][(int)BlockPlacePos.z].Type = BLOCK_AIR;
+		}
 	}
 }

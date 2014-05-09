@@ -13,7 +13,7 @@ using namespace JBnamespace;
 #define BLOCK_LIGHT_WOOD 9
 #define BLOCK_YELLOW_GRASS 10
 
-#define WorldBounds 128
+#define WorldBounds 256
 Blocks World32[WorldBounds][WorldBounds][WorldBounds];
 int MiniMapView[WorldBounds / 2][WorldBounds / 2];
 vector3D HeadRotation = vector3D(-45, 0, 0); // Left Right // Up down // Unused
@@ -33,7 +33,7 @@ float Speed = 0.2;
 float PI = 3.14159265359;
 float DECTORAD = PI / 180;
 
-float RenderDistance = 16;
+float RenderDistance = 20;
 
 
 bool RotationCube = false;
@@ -41,7 +41,7 @@ float TAngle = 0;
 float TSpeed = 10;
 
 //Physics
-float g = 11.22; // gets multiplyed by 0.875 before added
+float g = 11.22285713; // gets multiplyed by 0.875 before added
 bool fallDamageActivated = false;
 bool healthbarActivated = false;
 float playerHeight = 1.8;
@@ -53,6 +53,11 @@ bool IsPlayerOnGround = false;
 int RotateCoolDown = 0;
 
 //Gameplay Variables
-float reach = 5;
+float reach = 8;
 vector3D BlockLookingAt;
 vector3D BlockPlacePos;
+short chosenBlock = BLOCK_STONE;
+
+
+//MENU CRAP
+short gamestate = 3; //1 = Playing bitch! 0 - 3 % 1 = Menu crap

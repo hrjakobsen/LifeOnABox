@@ -69,6 +69,11 @@ void updatePlayerMotion() {
 		IsPlayerOnGround = false;
 		
 	}
+	for (int i = 49; i < 58; i++) {
+		if (KEYS[i]) {
+			chosenBlock = i - 47;
+		}
+	}
 	/*if (KEYS['z'] && RotateCoolDown <= 0) {
 		RotateWorld(3);
 		RotateCoolDown = FramesPerSecond;
@@ -83,6 +88,6 @@ void mouseClick(int button, int state, int x, int y) {
 		BreakBlock();
 	}
 	if (button == 2 && state == 0) {
-		PlaceBlock(2);
+		PlaceBlock();
 	}
 }

@@ -7,9 +7,11 @@ void gametimer() {
 	Diff = Diff / CLOCKS_PER_SEC;
 	if (Diff > 1 / FramesPerSecond) {
 		LastGameTick = clock();
+		if (gamestate == 1) {
+			physicTick((float)Diff);
+			LookingAt();
+		}
 		updatePlayerMotion();
-		physicTick((float)Diff);
-		LookingAt();
 		display();
 		FramesCount++;
 	}
@@ -35,7 +37,7 @@ int main(int argc, char* argv[]) {
 	glutKeyboardFunc(keyBoardCallBackDown);
 	glutKeyboardUpFunc(keyBoardCallBackUp);
 	glutMouseFunc(mouseClick);
-	glutFullScreen();
+	//glutFullScreen();
 
 	ProgramInit();
 
