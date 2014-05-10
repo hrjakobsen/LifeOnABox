@@ -78,6 +78,7 @@ void MenuControls() {
 				} else if (ChosenMenuItem == 3) {
 					WorldBounds = 256;
 				}
+				ProgramInit();
 				generate(WorldBounds);
 				UpdateWorldBlocksForAirLook(WorldBounds);
 				UpdateMiniMapView(false, 0, 0);

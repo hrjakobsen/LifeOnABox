@@ -11,5 +11,4 @@ struct Blocks
 {
 	short Type;
 	bool AirBesids;
-	short SpecialNumber;
 };

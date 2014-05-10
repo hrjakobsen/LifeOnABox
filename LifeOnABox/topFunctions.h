@@ -64,7 +64,7 @@ void UpdateMiniMapView(bool onlyOneBlock, int y, int z) {
 	}
 }
 
-void SwapTwoVariabels(int &A, int &B) {
+void SwapTwoVariabels(float &A, float &B) {
 	A = A + B;
 	B = A - B;
 	A = A - B;

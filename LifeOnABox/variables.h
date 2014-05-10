@@ -13,7 +13,6 @@ using namespace JBnamespace;
 #define BLOCK_LIGHT_WOOD 9
 #define BLOCK_YELLOW_GRASS 10
 
-#define HVIS if
 
 short WorldBounds = 32;
 Blocks World32[256][256][256];
@@ -35,7 +34,7 @@ float Speed = 0.2;
 float PI = 3.14159265359;
 float DECTORAD = PI / 180;
 
-float RenderDistance = 20;
+float RenderDistance = 16;
 
 
 bool RotationCube = false;

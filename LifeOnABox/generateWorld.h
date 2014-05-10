@@ -6,7 +6,6 @@ short HeightPorfile[128][128];
 void ClearPlaneAndHeightProfile(int WorldSize);
 void CreateTrees(int WorldSize, float HowOffen, int LeaveBlock, int WoodBlock);
 void CreateHillyTerrain(int WorldSize, int Hilly, int TopBlock, int RestBlock, int MiddelBlock, int NumberOfLayersWithMiddelBlock, int NumberOfLayersWithTopBlock);
-void CreateHouses(int WorldSize, float HowOffen, int Block1, int Block2);
 
 void generate(int Size) {
 	for (int x = 0; x < Size; x++) {
