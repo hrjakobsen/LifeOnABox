@@ -4,13 +4,15 @@ void UpdateWorldBlocksForAirLook(int WorldSize);
 void physicSetup(bool VelocityReset);
 void UpdateMiniMapView(bool onlyOneBlock, int y, int z);
 void UpdateSingleAirBlock(int x, int y, int z);
+void saveWorld();
+void loadWorld();
+void ResetTime();
+void display();
 
 void ProgramInit() {
-	//srand((unsigned int)time(NULL));
-	srand((unsigned int)16754);
-	generate(WorldBounds);
-	UpdateWorldBlocksForAirLook(WorldBounds);
-	UpdateMiniMapView(false, 0,0);
+	srand((unsigned int)time(NULL));
+	seed = rand();
+	srand(seed);
 	physicSetup(true);
 }
 
@@ -20,14 +22,12 @@ void UpdateSingleAirBlock(int X, int Y, int Z) {
 			for (int z = Z - 1; z <= Z + 1; z++) {
 				if (World32[x + 1][y][z].Type == BLOCK_AIR || World32[x - 1][y][z].Type == BLOCK_AIR || World32[x][y + 1][z].Type == BLOCK_AIR || World32[x][y - 1][z].Type == BLOCK_AIR || World32[x][y][z + 1].Type == BLOCK_AIR || World32[x][y][z - 1].Type == BLOCK_AIR) {
 					World32[x][y][z].AirBesids = true;
-				}
-				else {
+				} else {
 					World32[x][y][z].AirBesids = false;
 				}
 			}
 		}
 	}
-		
 }
 
 void UpdateWorldBlocksForAirLook(int WorldSize) {

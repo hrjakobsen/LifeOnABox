@@ -47,9 +47,15 @@
     <ClInclude Include="font.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="fileManagement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ToDo.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Functions.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

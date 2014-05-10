@@ -2,6 +2,7 @@
 
 clock_t LastGameTick = clock();
 int FramesCount = 0;
+
 void gametimer() {
 	double Diff = clock() - LastGameTick;
 	Diff = Diff / CLOCKS_PER_SEC;
@@ -10,14 +11,41 @@ void gametimer() {
 		if (gamestate == 1) {
 			physicTick((float)Diff);
 			LookingAt();
+			updatePlayerMotion();
+		} else {
+			MenuControls();
 		}
-		updatePlayerMotion();
 		display();
 		FramesCount++;
+
+		/*short Rotation = 0;
+		short Side1, Side2, Side3, Side4;
+		Side1 = World32[WorldBounds / 2 - 1][WorldBounds / 2][WorldBounds / 2].SpecialNumber + World32[WorldBounds / 2 - 1][WorldBounds / 2][WorldBounds / 2 - 1].SpecialNumber;
+		Side2 = World32[WorldBounds / 2 - 1][WorldBounds / 2 - 1][WorldBounds / 2].SpecialNumber + World32[WorldBounds / 2 - 1][WorldBounds / 2][WorldBounds / 2 - 1].SpecialNumber;
+		Side3 = World32[WorldBounds / 2 - 1][WorldBounds / 2 - 1][WorldBounds / 2].SpecialNumber + World32[WorldBounds / 2 - 1][WorldBounds / 2][WorldBounds / 2].SpecialNumber;
+		Side4 = World32[WorldBounds / 2 - 1][WorldBounds / 2][WorldBounds / 2].SpecialNumber + World32[WorldBounds / 2 - 1][WorldBounds / 2][WorldBounds / 2].SpecialNumber;
+		if (Side1 > Side2 && Side1 > Side3 && Side1 > Side4) {
+		Rotation = 0;
+		} else if (Side2 > Side1 && Side2 > Side3 && Side2 > Side4) {
+		Rotation = 1;
+		} else if (Side3 > Side1 && Side3 > Side2 && Side3 > Side4) {
+		Rotation = 2;
+		} else if(Side4 > Side1 && Side4 > Side3 && Side4 > Side2) {
+		Rotation = 3;
+		}
+		int PlaneID = World32[WorldBounds / 2 - 1][WorldBounds / 2][WorldBounds / 2].SpecialNumber * World32[WorldBounds / 2 - 1][WorldBounds / 2][WorldBounds / 2].SpecialNumber +
+		World32[WorldBounds / 2 - 1][WorldBounds / 2][WorldBounds / 2 - 1].SpecialNumber * World32[WorldBounds / 2 - 1][WorldBounds / 2][WorldBounds / 2 - 1].SpecialNumber +
+		World32[WorldBounds / 2 - 1][WorldBounds / 2 - 1][WorldBounds / 2].SpecialNumber * World32[WorldBounds / 2 - 1][WorldBounds / 2 - 1][WorldBounds / 2].SpecialNumber +
+		World32[WorldBounds / 2 - 1][WorldBounds / 2 - 1][WorldBounds / 2 - 1].SpecialNumber * World32[WorldBounds / 2 - 1][WorldBounds / 2 - 1][WorldBounds / 2 - 1].SpecialNumber;
+		std::cout << PlaneID << " - " << Rotation << "\n";*/
 	}
 	else {
 		std::this_thread::sleep_for(std::chrono::milliseconds(1 / (long long)FramesPerSecond - (long long)Diff));
 	}
+}
+
+void ResetTime() {
+	LastGameTick = clock();
 }
 
 int main(int argc, char* argv[]) {
@@ -38,8 +66,6 @@ int main(int argc, char* argv[]) {
 	glutKeyboardUpFunc(keyBoardCallBackUp);
 	glutMouseFunc(mouseClick);
 	//glutFullScreen();
-
-	ProgramInit();
 
 	glutMainLoop();
 }

@@ -88,6 +88,14 @@ void generate(int Size) {
 			}
 		}
 	}
+	/*World32[WorldBounds / 2][WorldBounds / 2][WorldBounds / 2].SpecialNumber = 1;
+	World32[WorldBounds / 2][WorldBounds / 2][WorldBounds / 2 - 1].SpecialNumber = 2;
+	World32[WorldBounds / 2][WorldBounds / 2 - 1][WorldBounds / 2].SpecialNumber = 3;
+	World32[WorldBounds / 2][WorldBounds / 2 - 1][WorldBounds / 2 - 1].SpecialNumber = 4;
+	World32[WorldBounds / 2 - 1][WorldBounds / 2][WorldBounds / 2].SpecialNumber = 5;
+	World32[WorldBounds / 2 - 1][WorldBounds / 2][WorldBounds / 2 - 1].SpecialNumber = 6;
+	World32[WorldBounds / 2 - 1][WorldBounds / 2 - 1][WorldBounds / 2].SpecialNumber = 7;
+	World32[WorldBounds / 2 - 1][WorldBounds / 2 - 1][WorldBounds / 2 - 1].SpecialNumber = 8;*/
 }
 
 void ClearPlaneAndHeightProfile(int WorldSize) {

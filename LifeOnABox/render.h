@@ -7,6 +7,15 @@ void drawString(char letter[], int length) {
 		glTranslatef(-8 * i, 0, 0);
 	}
 }
+
+void drawRealString(std::string letter, int length) {
+	for (int i = 0; i < length; i++) {
+		glTranslatef(8 * i, 0, 0);
+		drawChar(letter[i]);
+		glTranslatef(-8 * i, 0, 0);
+	}
+}
+
 void CreateSquare(float SideLength) {
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex2f(0, 0);
@@ -130,6 +139,8 @@ void ItemPicker() {
 void display() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
+	
+	
 	if (gamestate == 1) {
 		MiniMap();
 		ItemPicker();
@@ -159,7 +170,7 @@ void display() {
 		}
 
 		glColor3f(0.3, .3, 1);
-		glutSolidSphere(RenderDistance + 5, 20, 20);
+		glutSolidSphere(RenderDistance +5, 20, 20);
 
 		glTranslatef(-Position.y - .5, -Position.x - .5 - playerHeight, -Position.z - .5);
 
@@ -252,6 +263,10 @@ void display() {
 							if (x == BlockLookingAt.x && y == BlockLookingAt.y && z == BlockLookingAt.z) {
 								r -= .1; g -= .1; b -= .1;
 							}
+
+							//r = (float)(rand() % 256) / 255;
+							//g = (float)(rand() % 256) / 255;
+							//b = (float)(rand() % 256) / 255;
 							glColor3f(r, g, b);
 							glutSolidCube(1);
 							glColor3f(r - .1, g - .1, b - .1);
@@ -297,41 +312,100 @@ void display() {
 			}
 		}
 	} else if (gamestate == 0) {
-		glTranslatef(-28, 18.5, -100);
+		glTranslatef(-28, 26, -100);
 		glColor3f(1, 1, 1);
+		if (ChosenMenuItem == 1) {
+			glColor3f(0, 1, 0);
+		}
 		char Save1[] = "SAVE I";
 		drawString(Save1, 6);
 		glTranslatef(0, -15, 0);
+		glColor3f(1, 1, 1);
+		if (ChosenMenuItem == 2) {
+			glColor3f(0, 1, 0);
+		}
 		char Save2[] = "SAVE II";
 		drawString(Save2, 7);
 		glTranslatef(0, -15, 0);
+		glColor3f(1, 1, 1);
+		if (ChosenMenuItem == 3) {
+			glColor3f(0, 1, 0);
+		}
 		char Save3[] = "SAVE III";
 		drawString(Save3, 8);
-		glTranslatef(28, 11.5, 100);
+		glTranslatef(0, -15, 0);
+		glColor3f(1, 1, 1);
+		if (ChosenMenuItem == 4) {
+			glColor3f(0, 1, 0);
+		}
+		char Leave[] = "LEAVE";
+		drawString(Leave, 5);
+		glTranslatef(28, 19, 100);
 	} else if (gamestate == 2) {
-		glTranslatef(-28, 18.5, -100);
+		glTranslatef(-28, 26, -100);
 		glColor3f(1, 1, 1);
+		if (ChosenMenuItem == 1) {
+			glColor3f(0, 1, 0);
+		}
 		char Type1[] = "TYPE I";
 		drawString(Type1, 6);
 		glTranslatef(0, -15, 0);
+		glColor3f(1, 1, 1);
+		if (ChosenMenuItem == 2) {
+			glColor3f(0, 1, 0);
+		}
 		char Type2[] = "TYPE II";
 		drawString(Type2, 7);
 		glTranslatef(0, -15, 0);
+		glColor3f(1, 1, 1);
+		if (ChosenMenuItem == 3) {
+			glColor3f(0, 1, 0);
+		}
 		char Type3[] = "TYPE III";
 		drawString(Type3, 8);
-		glTranslatef(28, 11.5, 100);
+		glTranslatef(0, -15, 0);
+		glColor3f(1, 1, 1);
+		if (ChosenMenuItem == 4) {
+			glColor3f(0, 1, 0);
+		}
+		char Leave[] = "LEAVE";
+		drawString(Leave, 5);
+		glTranslatef(28, 19, 100);
 	} else if (gamestate == 3) {
-		glTranslatef(-28, 18.5, -100);
+		glTranslatef(-56, 26, -100);
 		glColor3f(1, 1, 1);
-		char Type1[] = "TYPE I";
-		drawString(Type1, 6);
+		if (ChosenMenuItem == 1) {
+			glColor3f(0, 1, 0);
+		}
+		char SAL[] = "SAVE AND LEAVE";
+		drawString(SAL, 14);
 		glTranslatef(0, -15, 0);
-		char Type2[] = "TYPE II";
-		drawString(Type2, 7);
+		glColor3f(1, 1, 1);
+		if (ChosenMenuItem == 2) {
+			glColor3f(0, 1, 0);
+		}
+		char SAM[] = "SAVE AND MENV";
+		drawString(SAM, 13);
 		glTranslatef(0, -15, 0);
-		char Type3[] = "TYPE III";
-		drawString(Type3, 8);
-		glTranslatef(28, 11.5, 100);
+		glColor3f(1, 1, 1);
+		if (ChosenMenuItem == 3) {
+			glColor3f(0, 1, 0);
+		}
+		char S[] = "SAVE";
+		drawString(S, 4);
+		glTranslatef(0, -15, 0);
+		glColor3f(1, 1, 1);
+		if (ChosenMenuItem == 4) {
+			glColor3f(0, 1, 0);
+		}
+		char Leave[] = "LEAVE";
+		drawString(Leave, 5);
+		glTranslatef(56, 19, 100);
+	} else if (gamestate == 4) {
+		glTranslatef(Gamestate4Text.length() * -4.0, 3.5, -100);
+		glColor3f(1, 1, 1);
+		drawRealString(Gamestate4Text, Gamestate4Text.length());
+		glTranslatef(Gamestate4Text.length() * 4.0, -3.5, 100);
 	}
 
 	glutSwapBuffers();

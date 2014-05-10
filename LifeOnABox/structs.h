@@ -4,9 +4,12 @@
 #include <time.h>
 #include <chrono>
 #include "namespaceDec.h"
+#include <string>
+#include <fstream>
 
 struct Blocks
 {
-	int Type;
+	short Type;
 	bool AirBesids;
+	short SpecialNumber;
 };
