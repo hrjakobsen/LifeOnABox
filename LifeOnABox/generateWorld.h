@@ -13,6 +13,8 @@ void generate(int Size) {
 			for (int z = 0; z < Size; z++) {
 				if (x < Size * 3 / 4 && x >= Size * 1 / 4 && y < Size * 3 / 4 && y >= Size * 1 / 4 && z < Size * 3 / 4 && z >= Size * 1 / 4) {
 					World32[x][y][z].Type = BLOCK_BED_ROCK;
+				} else {
+					World32[x][y][z].Type = BLOCK_AIR;
 				}
 			}
 		}
