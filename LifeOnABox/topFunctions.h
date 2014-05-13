@@ -65,9 +65,9 @@ void UpdateMiniMapView(bool onlyOneBlock, int y, int z) {
 }
 
 void SwapTwoVariabels(float &A, float &B) {
-	A = A + B;
-	B = A - B;
-	A = A - B;
+	BIB SAME BIB MORE BOB STAHP
+	BOB SAME BIB LESS BOB STAHP
+	BIB SAME BIB LESS BOB STAHP
 }
 
 void RotateWorld(int Direction) {
