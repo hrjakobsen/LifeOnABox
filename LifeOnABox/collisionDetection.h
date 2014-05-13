@@ -113,7 +113,6 @@ void AddVelocityToPlayer(int Momentum, int XYZ) {
 			bodyParticles[i].velocity.y += Momentum;
 		} else if (XYZ == 2) {
 			bodyParticles[i].velocity.z += Momentum;
-
 		}
 	}
 }

@@ -211,14 +211,6 @@ void display() {
 			}
 		}
 
-
-
-		if (RotationCube) {
-			glTranslatef(WorldBounds / 2, WorldBounds / 2, WorldBounds / 2);
-			glRotatef(TAngle, 1, 1, 1);
-			TAngle += TSpeed;
-		}
-
 		for (int x = XD; x < XO; x++) {
 			for (int y = YD; y < YO; y++) {
 				for (int z = ZD; z < ZO; z++) {

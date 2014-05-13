@@ -37,9 +37,7 @@ float DECTORAD = PI / 180;
 float RenderDistance = 16;
 
 
-bool RotationCube = false;
-float TAngle = 0;
-float TSpeed = 10;
+
 
 //Physics
 float g = 11.22285713; // gets multiplyed by 0.875 before added
