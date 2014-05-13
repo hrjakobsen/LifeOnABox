@@ -216,7 +216,8 @@ void display() {
 				for (int z = ZD; z < ZO; z++) {
 					if (World32[x][y][z].Type != BLOCK_AIR && World32[x][y][z].AirBesids) {
 						vector3D Distance = vector3D(x + Position.x, y + Position.y, z + Position.z);
-						if (Distance.squareMagnitude() <= RenderDistance * RenderDistance) {
+						float SM = Distance.squareMagnitude();
+						if (SM <= RenderDistance * RenderDistance) {
 							glTranslatef(-y, -x, -z);
 							float r, g, b;
 							r = 0;
@@ -262,36 +263,40 @@ void display() {
 							glColor3f(r, g, b);
 							glutSolidCube(1);
 							glColor3f(r - .1, g - .1, b - .1);
-							float trans = .16;
-							if (Position.y * -1 < y) {
-								glTranslatef(trans, 0, 0);
-								glutSolidCube(.7);
-								glTranslatef(-trans, 0, 0);
-							}
-							else {
-								glTranslatef(-trans, 0, 0);
-								glutSolidCube(.7);
-								glTranslatef(trans, 0, 0);
-							}
-							if (Position.x * -1 < x + playerHeight) {
-								glTranslatef(0, trans, 0);
-								glutSolidCube(.7);
-								glTranslatef(0, -trans, 0);
-							}
-							else {
-								glTranslatef(0, -trans, 0);
-								glutSolidCube(.7);
-								glTranslatef(0, trans, 0);
-							}
-							if (Position.z * -1 < z) {
-								glTranslatef(0, 0, trans);
-								glutSolidCube(.7);
-								glTranslatef(0, 0, -trans);
-							}
-							else {
-								glTranslatef(0, 0, -trans);
-								glutSolidCube(.7);
-								glTranslatef(0, 0, trans);
+							float trans = .01;
+							float SizeD = .9;
+							if (SM <= RenderDistance * RenderDistance / 4) {
+								//std::cout << SizeD << "\n";
+								if (Position.y * -1 < y) {
+									glTranslatef(.5 * (1 - SizeD) + trans, 0, 0);
+									glutSolidCube(SizeD);
+									glTranslatef(-.5 * (1 - SizeD) - trans, 0, 0);
+								}
+								else {
+									glTranslatef(-.5 * (1 - SizeD) - trans, 0, 0);
+									glutSolidCube(SizeD);
+									glTranslatef(.5 * (1 - SizeD) + trans, 0, 0);
+								}
+								if (Position.x * -1 < x + playerHeight) {
+									glTranslatef(0, .5 * (1 - SizeD) + trans, 0);
+									glutSolidCube(SizeD);
+									glTranslatef(0, -.5 * (1 - SizeD) - trans, 0);
+								}
+								else {
+									glTranslatef(0, -.5 * (1 - SizeD) - trans, 0);
+									glutSolidCube(SizeD);
+									glTranslatef(0, .5 * (1 - SizeD) + trans, 0);
+								}
+								if (Position.z * -1 < z) {
+									glTranslatef(0, 0, .5 * (1 - SizeD) + trans);
+									glutSolidCube(SizeD);
+									glTranslatef(0, 0, -.5 * (1 - SizeD) - trans);
+								}
+								else {
+									glTranslatef(0, 0, -.5 * (1 - SizeD) - trans);
+									glutSolidCube(SizeD);
+									glTranslatef(0, 0, .5 * (1 - SizeD) + trans);
+								}
 							}
 							//glutSolidSphere(1, 10, 10);
 
