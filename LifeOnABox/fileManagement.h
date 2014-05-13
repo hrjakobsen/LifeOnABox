@@ -47,16 +47,17 @@ std::string* Splitter(std::string Text, std::string StringToSplitAt) {
 		NewArray[Counter] = RemaningText.substr(0, RemaningText.find(StringToSplitAt));
 		RemaningText = RemaningText.substr(RemaningText.find(StringToSplitAt) + StringToSplitAt.length(), RemaningText.length() - 1);
 		Counter++;
-	}
+	}  
 	NewArray[Counter] = RemaningText;
 
 	std::string* Pointer = NewArray;
 	return Pointer;
 }
 
-int PartsPerPart = 256;
+int PartsPerPart = 32;
 
 void saveWorld() {
+	int BlockCount = 0;
 	std::string Data = "A";
 	short CurrentType = 0;
 	int TimesInARow = 0;
@@ -74,10 +75,11 @@ void saveWorld() {
 		}
 		for (int y = YD; y < YO; y++) {
 			if (y < WorldBounds / 4 || y > WorldBounds / 4 * 3) {
-				ZD = WorldBounds / 4;
-				ZO = WorldBounds / 4 * 3;
+				//ZD = WorldBounds / 4;
+				//ZO = WorldBounds / 4 * 3;
 			}
 			for (int z = ZD; z < ZO; z++) {
+				BlockCount++;
 				if (CurrentType == World32[x][y][z].Type) {
 					TimesInARow++;
 				} else {
@@ -91,6 +93,9 @@ void saveWorld() {
 					Parts++;
 					if (Parts % PartsPerPart == 0) {
 						WriteTxtFile("World" + std::to_string(worldNumber) + "-P-" + std::to_string(Parts / PartsPerPart) + ".JB", Data);
+						if ((Parts / PartsPerPart) % 10 == 0) {
+							std::cout << (float)BlockCount / (WorldBounds * WorldBounds * WorldBounds / 1.6587677725118483412322274881517) * 100 << " %  \t\t\t" << BlockCount << " blocks out of " << (int)(WorldBounds * WorldBounds * WorldBounds / 1.6587677725118483412322274881517) << " blocks\n";
+						}
 						Data = "A";
 					}
 				}
@@ -100,7 +105,7 @@ void saveWorld() {
 	WriteTxtFile("World" + std::to_string(worldNumber) + "-P-" + std::to_string(++Parts / PartsPerPart + 1) + ".JB", Data);
 	WriteTxtFile("World" + std::to_string(worldNumber) + "-PC.JB", std::to_string(Parts));
 	WriteTxtFile("World" + std::to_string(worldNumber) + "-WS.JB", std::to_string(WorldBounds));
-	std::cout << Parts / 256 + 1 << "\n";
+	std::cout << Parts / PartsPerPart + 1 << "\n";
 }
 
 bool DoesWorldExist() {
@@ -136,8 +141,8 @@ void loadWorld() {
 		}
 		for (int y = YD; y < YO; y++) {
 			if (y < WorldBounds / 4 || y > WorldBounds / 4 * 3) {
-				ZD = WorldBounds / 4;
-				ZO = WorldBounds / 4 * 3;
+				//ZD = WorldBounds / 4;
+				//ZO = WorldBounds / 4 * 3;
 			}
 			for (int z = ZD; z < ZO; z++) {
 				if (TimesBackInARow == 0) {
@@ -157,7 +162,9 @@ void loadWorld() {
 						MainPart++;
 						Data = ReadTxtFile("World" + std::to_string(worldNumber) + "-P-" + std::to_string(MainPart) + ".JB");
 						DataParts = Splitter(Data, "X");
-						std::cout << (float)BlockCount / (WorldBounds * WorldBounds * WorldBounds / 3.5) * 100 << " %  \t\t\t" << BlockCount << " blocks out of " << (int)(WorldBounds * WorldBounds * WorldBounds / 3) << " blocks\n";
+						if (MainPart % 10 == 0) {
+							std::cout << (float)BlockCount / (WorldBounds * WorldBounds * WorldBounds / 1.6587677725118483412322274881517) * 100 << " %  \t\t\t" << BlockCount << " blocks out of " << (int)(WorldBounds * WorldBounds * WorldBounds / 1.6587677725118483412322274881517) << " blocks\n";
+						}
 					}
 					std::string NextType = DataParts[PartWeAreAt + 1].substr(0, 1);
 					if (NextType == "A") {

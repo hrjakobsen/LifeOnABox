@@ -169,7 +169,6 @@ void LookingAt() {
 	Direction.x = sinf(HeadRotation.y*DECTORAD);
 	Direction.y = sinf(-HeadRotation.x*DECTORAD)*cosf(HeadRotation.y*DECTORAD);
 	Direction.z = cosf(-HeadRotation.x*DECTORAD)*cosf(HeadRotation.y*DECTORAD);
-	//std::cout << "x: " << Direction.x << ", y: " << Direction.y << ", z: " << Direction.z << std::endl;
 	Direction.normalize();
 	
 	bool Found = false;
