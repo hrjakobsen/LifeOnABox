@@ -34,7 +34,9 @@ float Speed = 0.2;
 float PI = 3.14159265359;
 float DECTORAD = PI / 180;
 
-float RenderDistance = 16;
+float RenderDistance = 3;
+
+double LastDiff = 0;
 
 
 

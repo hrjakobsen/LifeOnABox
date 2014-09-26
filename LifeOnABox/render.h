@@ -137,6 +137,9 @@ void ItemPicker() {
 }
 
 void display() {
+
+	
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 	
@@ -170,7 +173,7 @@ void display() {
 		}
 
 		glColor3f(0.3, .3, 1);
-		glutSolidSphere(RenderDistance +5, 20, 20);
+		glutSolidSphere(RenderDistance + 5, 20, 20);
 
 		glTranslatef(-Position.y - .5, -Position.x - .5 - playerHeight, -Position.z - .5);
 
@@ -263,32 +266,32 @@ void display() {
 							glutSolidCube(1);
 							glColor3f(r - .1, g - .1, b - .1);
 							float trans = .16;
-							if (Position.y * -1 < y) {
+							if (Position.y * -1 < y && World32[x][y - 1][z].Type == BLOCK_AIR) {
 								glTranslatef(trans, 0, 0);
 								glutSolidCube(.7);
 								glTranslatef(-trans, 0, 0);
 							}
-							else {
+							else if (World32[x][y + 1][z].Type == BLOCK_AIR) {
 								glTranslatef(-trans, 0, 0);
 								glutSolidCube(.7);
 								glTranslatef(trans, 0, 0);
 							}
-							if (Position.x * -1 < x + playerHeight) {
+							if (Position.x * -1 < x + playerHeight && World32[x - 1][y][z].Type == BLOCK_AIR) {
 								glTranslatef(0, trans, 0);
 								glutSolidCube(.7);
 								glTranslatef(0, -trans, 0);
 							}
-							else {
+							else if (World32[x + 1][y][z].Type == BLOCK_AIR) {
 								glTranslatef(0, -trans, 0);
 								glutSolidCube(.7);
 								glTranslatef(0, trans, 0);
 							}
-							if (Position.z * -1 < z) {
+							if (Position.z * -1 < z && World32[x][y][z - 1].Type == BLOCK_AIR) {
 								glTranslatef(0, 0, trans);
 								glutSolidCube(.7);
 								glTranslatef(0, 0, -trans);
 							}
-							else {
+							else if (World32[x][y][z + 1].Type == BLOCK_AIR) {
 								glTranslatef(0, 0, -trans);
 								glutSolidCube(.7);
 								glTranslatef(0, 0, trans);

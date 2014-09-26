@@ -2,11 +2,22 @@
 
 clock_t LastGameTick = clock();
 int FramesCount = 0;
+bool check = false;
 
 void gametimer() {
 	double Diff = clock() - LastGameTick;
 	Diff = Diff / CLOCKS_PER_SEC;
+	LastDiff = Diff;
+	if (LastDiff > 0.05 && check && gamestate && RenderDistance > 5) {
+		RenderDistance--;
+		check = false;
+	}
+	else if (LastDiff < 0.01 && check && gamestate) {
+		RenderDistance++;
+		check = false;
+	}
 	if (Diff > 1 / FramesPerSecond) {
+		check = true;
 		LastGameTick = clock();
 		if (gamestate == 1) {
 			physicTick((float)Diff);
@@ -40,7 +51,7 @@ void gametimer() {
 		std::cout << PlaneID << " - " << Rotation << "\n";*/
 	}
 	else {
-		std::this_thread::sleep_for(std::chrono::milliseconds(1 / (long long)FramesPerSecond - (long long)Diff));
+		std::this_thread::sleep_for(std::chrono::milliseconds(1 / (long long)FramesPerSecond - (long long)Diff/2));
 	}
 }
 
