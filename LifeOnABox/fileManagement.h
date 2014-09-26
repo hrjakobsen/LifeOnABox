@@ -115,6 +115,13 @@ bool DoesWorldExist() {
 }
 
 void loadWorld() {
+	for (int x = 0; x < WorldBounds; x++) {
+		for (int y = 0; y < WorldBounds; y++) {
+			for (int z = 0; z < WorldBounds; z++) {
+				World32[x][y][z].Type = BLOCK_AIR;
+			}
+		}
+	}
 	int MainPart = 1;
 	int PartCount = 0;
 	int BlockCount = 0;
